@@ -15,7 +15,6 @@ CookieHelper::restaurarSessao();
 // ====== 1. Inicializar o Cardápio (Base de Dados em Memória) ======
 $cardapio = new Cardapio();
 
-// Usando os produtos originais que estavam cadastrados no seu sistema (Pão e Leite)
 $pao = new Produto("Pão", 2.50);
 $leite = new Produto("Leite", 3.50);
 
