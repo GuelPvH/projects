@@ -1,10 +1,8 @@
 <?php
 require_once 'bootstrap.php';
 
-// Apenas uma categoria "Todos" já que a classe Produto básica não suporta categorias nativamente
 $categorias = ['Todos os Lanches'];
 
-// Pega os produtos do cardápio em memória
 $produtosObjeto = $cardapio->listarProdutos();
 ?>
 <!DOCTYPE html>
