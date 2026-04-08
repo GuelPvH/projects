@@ -1,12 +1,22 @@
 {
     "name": "luca/dinner",
     "autoload": {
-        "psr-4": {"luca\\dinner\\": ["src/", "src/classes"]}
+        "psr-4": {
+            "luca\\dinner\\": [
+                "src/",
+                "src/classes/",
+                "views/"
+            ]
+        }
     },
     "authors": [
         {
             "name": "Luca Siqueira Assis Gorayeb de Mello",
             "email": "lucagorayeb@gmail.com"
+        },
+        {
+            "name": "Miguel Carrilho de Arruda Olviera dos Santos",
+            "email": "miguelcleiton25@outlook.com"
         }
     ],
     "require": {}
