@@ -4,7 +4,8 @@ namespace luca\dinner;
 class Cliente extends Usuario{
     private Pedido $pedido;
 
-    public function __construct(){
+    public function __construct(string $nome = ''){
+        parent::__construct($nome);
         $this->pedido = new Pedido();
     }
 
@@ -26,7 +27,7 @@ class Cliente extends Usuario{
     }
 
     public function removerPedido(Produto $produto, $quantidadeItens) : void{
-        $this->pedido->removerPedido();
+        $this->pedido->removerPedido($produto, $quantidadeItens);
         $this->mostrarMensagem(false, $produto);
     }
 

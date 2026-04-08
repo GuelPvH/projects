@@ -16,33 +16,37 @@ abstract class Usuario{
     abstract function podeRemoverProduto() : bool;
     abstract function podeAlterarPrecoProduto() : bool;
 
-    protected function adicionarProduto(Cardapio $cardapio) : string{
+    protected function adicionarProduto(Cardapio $cardapio, Produto $produto) : string{
         if($this->podeAdicionarProduto()){
-            $cardapio -> adicionarProduto();
+            $cardapio -> adicionarProduto($produto);
         }
-        $this->mostraMensagem($this->podeAdicionarProduto());
+        return $this->mostraMensagem($this->podeAdicionarProduto());
     }
 
-    protected function removerProduto(Cardapio $cardapio){
+    protected function removerProduto(Cardapio $cardapio, Produto $produto){
         if($this->podeRemoverProduto()){
-            $cardapio -> removerProduto();
+            $cardapio -> removerProduto($produto);
         }
-        $this->mostraMensagem($this->podeRemoverProduto());
+        return $this->mostraMensagem($this->podeRemoverProduto());
     }
 
-    protected function alterarPrecoProduto(Produto $produto){
+    protected function alterarPrecoProduto(Produto $produto, float $novoPreco){
         if($this->podeAlterarPrecoProduto()){
-            $produto -> setPreco();
+            $produto -> setPreco($novoPreco);
         }
-        $this->mostraMensagem($this->podeAlterarPrecoProduto());
+        return $this->mostraMensagem($this->podeAlterarPrecoProduto());
     }
 
-    private function mostraMensagem(bool $permissao){
+    private function mostraMensagem(bool $permissao) : string{
         if($permissao){
             return "Operação bem sucedida";
         }else{
             return "Operação não permitida";
         }
+    }
+
+    public function getNome() : string{
+        return $this->nome;
     }
 
 }

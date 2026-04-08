@@ -19,7 +19,7 @@ class Pedido{
     }
 
     public function removerPedido(Produto $produto, $quantidadeItens = 1){
-        $valueItem;
+        $valueItem = 0;
         foreach($this->pedidos as $pedido){
             foreach($pedido as $key => $value){
                 if($key == "Quantidade"){
@@ -56,7 +56,7 @@ class Pedido{
     }
 
     public function calculaPagarPedido() : void{
-        $valor;
+        $valor = 0;
         foreach($this->pedidos as $pedido){
             foreach($pedido as $key => $value){
                 if($key == "Total"){
