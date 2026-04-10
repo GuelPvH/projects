@@ -37,5 +37,15 @@ function getCliente()
     return null;
 }
 
+// Função utilitária para contar itens no carrinho
+function getCarrinhoCount()
+{
+    global $pedido_atual;
+    if (!$pedido_atual) {
+        return 0;
+    }
+    return $pedido_atual->getQuantidadeTotalItens();
+}
+
 
 ?>

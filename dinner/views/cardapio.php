@@ -6,6 +6,9 @@ $categorias = ['Todos os Lanches'];
 
 // Pega os produtos do cardápio em memória
 $produtosObjeto = $cardapio->listarProdutos();
+
+// Contagem de itens no carrinho para o badge
+$carrinhoCount = getCarrinhoCount();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -13,7 +16,7 @@ $produtosObjeto = $cardapio->listarProdutos();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardápio</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css?v=2">
     <style>
         .page-header {
             background-color: var(--color-background);
@@ -65,6 +68,11 @@ $produtosObjeto = $cardapio->listarProdutos();
             </a>
             
             <a href="checkout.php" class="nav-item">
+                <?php if ($carrinhoCount > 0): ?>
+                    <span class="cart-badge" data-count="<?php echo $carrinhoCount; ?>">
+                        <?php echo $carrinhoCount > 99 ? '99+' : $carrinhoCount; ?>
+                    </span>
+                <?php endif; ?>
                 <svg viewBox="0 0 24 24">
                     <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-9.83-3.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4h-.01l-1.1 2-2.76 5H8.53l-.13-.27L6.16 6l-.95-2-.94-2H1v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.13 0-.25-.11-.25-.25z"/>
                 </svg>

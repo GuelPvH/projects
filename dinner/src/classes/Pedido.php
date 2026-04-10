@@ -2,69 +2,74 @@
 namespace luca\dinner;
 
 class Pedido{
-    protected float $totalPagar;
+    protected float $totalPagar = 0.0;
     protected array $pedidos = [];
-    protected int $quantidadeItens;
+    protected int $quantidadeItens = 0;
 
-    public function adicionarPedido(Produto $produto, $quantidadeItens = 1){
-        $this->pedidos[$produto->getNome()] = [
-            "Preço" => $produto->getPreco(), 
-            "Quantidade" => $this->quantidadeItens = $quantidadeItens, 
-            "Total" => $this->quantidadeItens * $produto->getPreco()
-        ];
+    public function __wakeup()
+    {
+        $this->recalcularTotais();
+    }
+
+    public function adicionarPedido(Produto $produto, int $quantidadeAdicionar = 1){
+        $nomeProduto = $produto->getNome();
+        $precoProduto = $produto->getPreco();
+
+        if (isset($this->pedidos[$nomeProduto])) {
+            $this->pedidos[$nomeProduto]['Quantidade'] += $quantidadeAdicionar;
+        } else {
+            $this->pedidos[$nomeProduto] = [
+                "Preço" => $precoProduto,
+                "Quantidade" => $quantidadeAdicionar,
+            ];
+        }
+
+        $this->pedidos[$nomeProduto]['Total'] = $this->pedidos[$nomeProduto]['Quantidade'] * $precoProduto;
+        $this->recalcularTotais();
     }
 
     public function listarPedido() : array{
         return $this->pedidos;
     }
 
-    public function removerPedido(Produto $produto, $quantidadeItens = 1){
-        $valueItem = 0;
-        foreach($this->pedidos as $pedido){
-            foreach($pedido as $key => $value){
-                if($key == "Quantidade"){
-                    $valueItem = $value - $quantidadeItens;
-                }
+    public function removerPedido(Produto $produto, int $quantidadeRemover = 1) : void {
+        $nomeProduto = $produto->getNome();
+
+        if (isset($this->pedidos[$nomeProduto])) {
+            $this->pedidos[$nomeProduto]['Quantidade'] -= $quantidadeRemover;
+
+            if ($this->pedidos[$nomeProduto]['Quantidade'] <= 0) {
+                unset($this->pedidos[$nomeProduto]);
+            } else {
+                $this->pedidos[$nomeProduto]['Total'] = $this->pedidos[$nomeProduto]['Quantidade'] * $produto->getPreco();
             }
-        }
-        if($valueItem <= 0){
-            return $this->pedidos[$produto->getNome()] = [
-                "Preço" => $produto->getPreco(),
-                "Quantidade" => "Item Removido",
-                "Total" => 0.00
-            ];
-        }else{
-            return $this->pedidos[$produto->getNome()] = [
-                "Preço" => $produto->getPreco(),
-                "Quantidade" => $this->quantidadeItens = $valueItem,
-                "Total" => $this->totalPagar = $valueItem * $produto->getPreco()
-            ];
+
+            $this->recalcularTotais();
         }
     }
 
     public function finalizarPedido() : float{
-            $this->calculaPagarPedido();
-            return $this->getTotalPagar();
+        return $this->getTotalPagar();
     }
 
      public function getTotalPagar() : float{
         return $this->totalPagar;
     }
 
-    private function setTotalPagar($valor) : void{
-        $this->totalPagar = $valor;
+    public function getQuantidadeTotalItens(): int
+    {
+        return $this->quantidadeItens;
     }
 
-    public function calculaPagarPedido() : void{
-        $valor = 0;
+    private function recalcularTotais() : void{
+        $valorTotal = 0;
+        $itensTotais = 0;
         foreach($this->pedidos as $pedido){
-            foreach($pedido as $key => $value){
-                if($key == "Total"){
-                    $valor += $value;
-                }
-            }
+            $valorTotal += $pedido['Total'] ?? 0;
+            $itensTotais += $pedido['Quantidade'] ?? 0;
         }
-        $this->setTotalPagar($valor);
+        $this->totalPagar = $valorTotal;
+        $this->quantidadeItens = $itensTotais;
     }
 
 }

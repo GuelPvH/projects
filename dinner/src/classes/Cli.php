@@ -6,7 +6,7 @@ class Cli{
     public $nome;
 
     public function apresentacao(){
-        echo "Bem vindo a lanchonete Food-CLI\n";
+        echo "Bem vindo a MecDonin - Mistura Perfeita!\n";
         $this->nome = readline("Como você gostaria de ser chamado(a): ");
         echo "Olá ".$this->getNome()." é um prazer ter você aqui!\n";
         $this->cliente = new Cliente($this->getNome());

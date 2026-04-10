@@ -47,23 +47,24 @@ $nome_display = $is_logged_in ? htmlspecialchars($cliente->getNome(), ENT_QUOTES
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lanchonete - Peça Aqui</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>MecDonin - Mistura Perfeita</title>
+    <link rel="stylesheet" href="assets/css/style.css?v=2">
     <style>
         .home-container {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: var(--spacing-lg) var(--spacing-md);
+            padding: var(--spacing-md) var(--spacing-md);
             text-align: center;
             background-color: var(--color-background);
+            gap: var(--spacing-sm);
         }
 
         .slogan {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--color-text-muted);
-            margin-bottom: var(--spacing-xl);
+            margin-bottom: var(--spacing-md);
         }
     </style>
 </head>
@@ -72,14 +73,16 @@ $nome_display = $is_logged_in ? htmlspecialchars($cliente->getNome(), ENT_QUOTES
     <div class="home-container">
 
         <div class="logo-container">
-            <div class="logo-box">LOGO</div>
+            <div class="logo-box">
+                <img src="assets/img/logo.png" alt="MecDonin Logo" class="logo-img">
+            </div>
             <span class="status-badge">Aberta</span>
         </div>
 
         <?php if ($is_logged_in): ?>
 
             <h1 class="mb-sm">Olá, <?php echo $nome_display; ?>!</h1>
-            <p class="slogan">Peça aqui o melhor lanche da cidade!</p>
+            <p class="slogan">Peça aqui sua mistura perfeita!</p>
 
             <a href="views/cardapio.php" class="btn btn-primary mt-md">Acessar o cardápio</a>
 
@@ -88,7 +91,7 @@ $nome_display = $is_logged_in ? htmlspecialchars($cliente->getNome(), ENT_QUOTES
         <?php else: ?>
 
             <h1 class="mb-sm">Bem-vindo!</h1>
-            <p class="slogan">Identifique-se para continuar o melhor lanche da cidade.</p>
+            <p class="slogan">Identifique-se para continuar na MecDonin!</p>
 
             <form action="index.php" method="POST" class="mt-md">
                 <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">

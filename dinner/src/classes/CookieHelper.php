@@ -6,7 +6,7 @@ class CookieHelper {
     public static function restaurarSessao() {
         // Se a sessão principal expirou mas os cookies persistem, restaura.
         if (!isset($_SESSION['usuario_nome']) && isset($_COOKIE['app_cliente_nome']) && isset($_COOKIE['app_cliente_sobrenome'])) {
-            $_SESSION['usuario_nome'] = $_COOKIE['app_cliente_nome'];
+            $_SESSION['usuario_nome']      = $_COOKIE['app_cliente_nome'];
             $_SESSION['usuario_sobrenome'] = $_COOKIE['app_cliente_sobrenome'];
         }
     }
