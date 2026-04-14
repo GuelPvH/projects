@@ -1,0 +1,39 @@
+Minhas classes: Cardapio, Cliente, Pedido, Produto, Usuario;
+
+-- CLASSES INDEPENDENTES E DEPENDENTES --
+
+Produto é independente.
+
+Usuario é independente.
+
+Cliente é uma classe filha de Usuario e é independente.
+
+Pedido depende dos produtos, Cardapio e Cliente.
+
+Cardapio não representa uma tabela, apenas funções que podem ser realizadas.
+
+-- CARDINALIDADE DO RELACIONAMENTO --
+
+Cliente 1:----------->:N Pedido (Um pedido só pode ter um cliente, mas um cliente pode ter mais de um pedido);
+
+Pedido N:------------>:M Produto (Um produto pode estar em muitos pedidos e um pedido pode ter muitos produtos);
+
+Usuario -----PAI-----> Cliente;
+
+
+Minhas tabelas: Produto, Fornecedor, Usuario, Cliente, Pedidos, Item;
+
+Tabela Produto - Cada produto tem um fornecedor.
+                 O produto tem id, nome e preço.
+
+Tabela Fornecedor - O fornecedor tem um id e um nome.
+                    Tem uma fk na tabela dos produtos.
+
+Tabela Usuario - O usuario tem nome e tipo de usuario;
+
+Tabela Cliente - O cliente é filho do Usuario, cliente só tem permissão para fazer pedido.
+
+Tabela Pedidos - O pedido armazena vários itens. O pedido tem id, fk cliente e total a pagar.
+
+Tabela Item - O item tem id, fk pedido, fk produto, quantidade e fk preço.
+

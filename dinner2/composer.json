@@ -1,0 +1,22 @@
+{
+    "name": "luca/dinner",
+    "autoload": {
+        "psr-4": {
+            "luca\\dinner\\": [
+                "src/",
+                "src/models",
+                "src/database",
+                "src/repository",
+                "src/repository/env",
+                "src/services"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Luca Siqueira Assis Gorayeb de Mello",
+            "email": "lucagorayeb@gmail.com"
+        }
+    ],
+    "require": {}
+}
